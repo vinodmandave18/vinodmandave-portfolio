@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Prime numbers 1 to 100 | Lab Assignment 7</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 7</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 7</p><h1>Prime numbers 1 to 100</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to display all prime numbers between 1 and 100 in an HTML page.</p>
+<section class="card">
+<div id="out" class="chips"></div>
+<p id="count"></p>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div id=&quot;out&quot; class=&quot;chips&quot;&gt;&lt;/div&gt;
+&lt;p id=&quot;count&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+function isPrime(n) {
+  if (n &lt; 2) return false;
+  for (let i = 2; i * i &lt;= n; i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+const out = document.getElementById(&quot;out&quot;);
+let count = 0;
+for (let i = 1; i &lt;= 100; i++) {
+  if (isPrime(i)) {
+    out.innerHTML += &#x27;&lt;span class=&quot;chip&quot;&gt;&#x27; + i + &quot;&lt;/span&gt;&quot;;
+    count++;
+  }
+}
+document.getElementById(&quot;count&quot;).textContent = &quot;Total prime numbers: &quot; + count;
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/6/index.html" target="_top">&larr; Odd numbers 1 to 100</a><a href="../assignments/8/index.html" target="_top">Multiplication tables 1 to 30 &rarr;</a></nav></main>
+<script>
+function isPrime(n) {
+  if (n < 2) return false;
+  for (let i = 2; i * i <= n; i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+const out = document.getElementById("out");
+let count = 0;
+for (let i = 1; i <= 100; i++) {
+  if (isPrime(i)) {
+    out.innerHTML += '<span class="chip">' + i + "</span>";
+    count++;
+  }
+}
+document.getElementById("count").textContent = "Total prime numbers: " + count;
+</script></body></html>

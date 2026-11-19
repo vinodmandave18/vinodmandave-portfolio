@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Print multiplication table | Lab Assignment 22</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 22</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 22</p><h1>Print multiplication table</h1>
+<p class="q"><strong>Question:</strong> Create an HTML page with a text box, a Print Table button, and a text area. On clicking the button, display the multiplication table of the entered number. If the input is not a valid number, change the background colour to red and display an alert message.</p>
+<section class="card">
+<label for="num">Enter a number</label>
+<input id="num">
+<button id="print">Print Table</button>
+<label for="area">Table</label>
+<textarea id="area" rows="11" readonly></textarea>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;label for=&quot;num&quot;&gt;Enter a number&lt;/label&gt;
+&lt;input id=&quot;num&quot;&gt;
+&lt;button id=&quot;print&quot;&gt;Print Table&lt;/button&gt;
+&lt;label for=&quot;area&quot;&gt;Table&lt;/label&gt;
+&lt;textarea id=&quot;area&quot; rows=&quot;11&quot; readonly&gt;&lt;/textarea&gt;
+
+&lt;script&gt;
+const input = document.getElementById(&quot;num&quot;);
+document.getElementById(&quot;print&quot;).addEventListener(&quot;click&quot;, function () {
+  const v = input.value.trim();
+  const area = document.getElementById(&quot;area&quot;);
+  if (v === &quot;&quot; || isNaN(v)) {
+    input.style.background = &quot;red&quot;;       // invalid: red background
+    input.style.color = &quot;white&quot;;
+    area.value = &quot;&quot;;
+    alert(&quot;Invalid input! Please enter a valid number.&quot;);
+    return;
+  }
+  input.style.background = &quot;&quot;;
+  input.style.color = &quot;&quot;;
+  const n = Number(v);
+  let text = &quot;&quot;;
+  for (let i = 1; i &lt;= 10; i++) {
+    text += n + &quot; x &quot; + i + &quot; = &quot; + (n * i) + &quot;\n&quot;;
+  }
+  area.value = text;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/21/index.html" target="_top">&larr; Replace letter m with a</a><span></span></nav></main>
+<script>
+const input = document.getElementById("num");
+document.getElementById("print").addEventListener("click", function () {
+  const v = input.value.trim();
+  const area = document.getElementById("area");
+  if (v === "" || isNaN(v)) {
+    input.style.background = "red";       // invalid: red background
+    input.style.color = "white";
+    area.value = "";
+    alert("Invalid input! Please enter a valid number.");
+    return;
+  }
+  input.style.background = "";
+  input.style.color = "";
+  const n = Number(v);
+  let text = "";
+  for (let i = 1; i <= 10; i++) {
+    text += n + " x " + i + " = " + (n * i) + "\n";
+  }
+  area.value = text;
+});
+</script></body></html>

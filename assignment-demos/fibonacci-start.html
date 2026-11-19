@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fibonacci series (page 1 of 2) | Lab Assignment 16</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 16</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 16</p><h1>Fibonacci series (page 1 of 2)</h1>
+<p class="q"><strong>Question:</strong> Create two HTML pages. When the user clicks the Show button on the first page, display the first 10 terms of the Fibonacci series in a text box on the second page. Provide a Back button to return to the first page.</p>
+<section class="card">
+<p>This is <strong>page 1</strong>. Click <em>Show</em> to open page 2, which displays the first 10 terms of the Fibonacci series in a text box.</p>
+<button id="show">Show</button>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;p&gt;This is &lt;strong&gt;page 1&lt;/strong&gt;. Click &lt;em&gt;Show&lt;/em&gt; to open page 2, which displays the first 10 terms of the Fibonacci series in a text box.&lt;/p&gt;
+&lt;button id=&quot;show&quot;&gt;Show&lt;/button&gt;
+
+&lt;script&gt;
+document.getElementById(&quot;show&quot;).addEventListener(&quot;click&quot;, function () {
+  window.location.href = &quot;fibonacci-result.html&quot;;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/15/index.html" target="_top">&larr; setInterval() and clearInterval()</a><a href="../assignments/17/index.html" target="_top">Dropdown to text box (max 10) &rarr;</a></nav></main>
+<script>
+document.getElementById("show").addEventListener("click", function () {
+  window.location.href = "fibonacci-result.html";
+});
+</script></body></html>

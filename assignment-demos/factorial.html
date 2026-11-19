@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Factorial of a number | Lab Assignment 14</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 14</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 14</p><h1>Factorial of a number</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to calculate the factorial of a given number.</p>
+<section class="card">
+<label for="num">Enter a non-negative integer</label>
+<input id="num" type="number" min="0" value="5">
+<button id="b">Calculate factorial</button>
+<div id="out" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;label for=&quot;num&quot;&gt;Enter a non-negative integer&lt;/label&gt;
+&lt;input id=&quot;num&quot; type=&quot;number&quot; min=&quot;0&quot; value=&quot;5&quot;&gt;
+&lt;button id=&quot;b&quot;&gt;Calculate factorial&lt;/button&gt;
+&lt;div id=&quot;out&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+function factorial(n) {
+  let result = 1n;                 // BigInt so large factorials stay exact
+  for (let i = 2n; i &lt;= BigInt(n); i++) result *= i;
+  return result;
+}
+document.getElementById(&quot;b&quot;).addEventListener(&quot;click&quot;, function () {
+  const v = document.getElementById(&quot;num&quot;).value;
+  const out = document.getElementById(&quot;out&quot;);
+  const n = Number(v);
+  if (v === &quot;&quot; || !Number.isInteger(n) || n &lt; 0 || n &gt; 500) {
+    out.className = &quot;msg show err&quot;; out.textContent = &quot;Enter a whole number between 0 and 500.&quot;; return;
+  }
+  out.className = &quot;msg show ok&quot;;
+  out.textContent = n + &quot;! = &quot; + factorial(n).toString();
+  out.style.overflowWrap = &quot;anywhere&quot;;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/13/index.html" target="_top">&larr; Login page validation</a><a href="../assignments/15/index.html" target="_top">setInterval() and clearInterval() &rarr;</a></nav></main>
+<script>
+function factorial(n) {
+  let result = 1n;                 // BigInt so large factorials stay exact
+  for (let i = 2n; i <= BigInt(n); i++) result *= i;
+  return result;
+}
+document.getElementById("b").addEventListener("click", function () {
+  const v = document.getElementById("num").value;
+  const out = document.getElementById("out");
+  const n = Number(v);
+  if (v === "" || !Number.isInteger(n) || n < 0 || n > 500) {
+    out.className = "msg show err"; out.textContent = "Enter a whole number between 0 and 500."; return;
+  }
+  out.className = "msg show ok";
+  out.textContent = n + "! = " + factorial(n).toString();
+  out.style.overflowWrap = "anywhere";
+});
+</script></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student marksheet by seat number | Lab Assignment 4</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 4</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 4</p><h1>Student marksheet by seat number</h1>
+<p class="q"><strong>Question:</strong> Display a student&#x27;s marksheet based on a specified seat number.</p>
+<section class="card">
+<label for="seat">Enter seat number</label>
+<input id="seat" placeholder="Try 1001, 1002, 1003 or 1004">
+<button id="go">Show marksheet</button>
+<div id="out"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;label for=&quot;seat&quot;&gt;Enter seat number&lt;/label&gt;
+&lt;input id=&quot;seat&quot; placeholder=&quot;Try 1001, 1002, 1003 or 1004&quot;&gt;
+&lt;button id=&quot;go&quot;&gt;Show marksheet&lt;/button&gt;
+&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const students = {
+  1001: {name:&quot;Aarav Patil&quot;, marks:{&quot;Client-Side Web Technologies&quot;:78,&quot;Java Programming&quot;:82,&quot;DBMS&quot;:69,&quot;Python&quot;:74,&quot;Mathematics&quot;:65}},
+  1002: {name:&quot;Sneha Kulkarni&quot;, marks:{&quot;Client-Side Web Technologies&quot;:91,&quot;Java Programming&quot;:88,&quot;DBMS&quot;:85,&quot;Python&quot;:90,&quot;Mathematics&quot;:79}},
+  1003: {name:&quot;Rohan Deshmukh&quot;, marks:{&quot;Client-Side Web Technologies&quot;:55,&quot;Java Programming&quot;:48,&quot;DBMS&quot;:62,&quot;Python&quot;:51,&quot;Mathematics&quot;:39}},
+  1004: {name:&quot;Priya Shah&quot;, marks:{&quot;Client-Side Web Technologies&quot;:67,&quot;Java Programming&quot;:72,&quot;DBMS&quot;:70,&quot;Python&quot;:64,&quot;Mathematics&quot;:58}}
+};
+document.getElementById(&quot;go&quot;).addEventListener(&quot;click&quot;, function () {
+  const out = document.getElementById(&quot;out&quot;);
+  const seat = document.getElementById(&quot;seat&quot;).value.trim();
+  const s = students[seat];
+  if (!s) { out.innerHTML = &#x27;&lt;div class=&quot;msg show err&quot;&gt;No student found for seat number &quot;&#x27; + seat.replace(/&lt;/g, &quot;&quot;) + &#x27;&quot;.&lt;/div&gt;&#x27;; return; }
+  let rows = &quot;&quot;, total = 0, pass = true;
+  for (const subject in s.marks) {
+    const m = s.marks[subject];
+    total += m;
+    if (m &lt; 40) pass = false;
+    rows += &quot;&lt;tr&gt;&lt;td&gt;&quot; + subject + &quot;&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;&quot; + m + &quot;&lt;/td&gt;&lt;td&gt;&quot; + (m &gt;= 40 ? &quot;Pass&quot; : &quot;Fail&quot;) + &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+  }
+  const max = Object.keys(s.marks).length * 100;
+  const pct = (total / max * 100).toFixed(2);
+  const grade = !pass ? &quot;F&quot; : pct &gt;= 75 ? &quot;A (Distinction)&quot; : pct &gt;= 60 ? &quot;B (First Class)&quot; : pct &gt;= 50 ? &quot;C (Second Class)&quot; : &quot;D (Pass)&quot;;
+  out.innerHTML = &quot;&lt;h3&gt;&quot; + s.name + &quot; &amp;mdash; Seat No. &quot; + seat + &quot;&lt;/h3&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Subject&lt;/th&gt;&lt;th&gt;Max&lt;/th&gt;&lt;th&gt;Obtained&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&quot; + rows +
+    &quot;&lt;tr&gt;&lt;th&gt;Total&lt;/th&gt;&lt;th&gt;&quot; + max + &quot;&lt;/th&gt;&lt;th&gt;&quot; + total + &quot;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;strong&gt;Percentage:&lt;/strong&gt; &quot; + pct + &quot;% &amp;nbsp; &lt;strong&gt;Result:&lt;/strong&gt; &quot; + (pass ? &quot;PASS&quot; : &quot;FAIL&quot;) + &quot; &amp;nbsp; &lt;strong&gt;Grade:&lt;/strong&gt; &quot; + grade + &quot;&lt;/p&gt;&quot;;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/3/index.html" target="_top">&larr; Hospital registration form</a><a href="../assignments/5/index.html" target="_top">Even numbers 1 to 100 &rarr;</a></nav></main>
+<script>
+const students = {
+  1001: {name:"Aarav Patil", marks:{"Client-Side Web Technologies":78,"Java Programming":82,"DBMS":69,"Python":74,"Mathematics":65}},
+  1002: {name:"Sneha Kulkarni", marks:{"Client-Side Web Technologies":91,"Java Programming":88,"DBMS":85,"Python":90,"Mathematics":79}},
+  1003: {name:"Rohan Deshmukh", marks:{"Client-Side Web Technologies":55,"Java Programming":48,"DBMS":62,"Python":51,"Mathematics":39}},
+  1004: {name:"Priya Shah", marks:{"Client-Side Web Technologies":67,"Java Programming":72,"DBMS":70,"Python":64,"Mathematics":58}}
+};
+document.getElementById("go").addEventListener("click", function () {
+  const out = document.getElementById("out");
+  const seat = document.getElementById("seat").value.trim();
+  const s = students[seat];
+  if (!s) { out.innerHTML = '<div class="msg show err">No student found for seat number "' + seat.replace(/</g, "") + '".</div>'; return; }
+  let rows = "", total = 0, pass = true;
+  for (const subject in s.marks) {
+    const m = s.marks[subject];
+    total += m;
+    if (m < 40) pass = false;
+    rows += "<tr><td>" + subject + "</td><td>100</td><td>" + m + "</td><td>" + (m >= 40 ? "Pass" : "Fail") + "</td></tr>";
+  }
+  const max = Object.keys(s.marks).length * 100;
+  const pct = (total / max * 100).toFixed(2);
+  const grade = !pass ? "F" : pct >= 75 ? "A (Distinction)" : pct >= 60 ? "B (First Class)" : pct >= 50 ? "C (Second Class)" : "D (Pass)";
+  out.innerHTML = "<h3>" + s.name + " &mdash; Seat No. " + seat + "</h3><table><tr><th>Subject</th><th>Max</th><th>Obtained</th><th>Status</th></tr>" + rows +
+    "<tr><th>Total</th><th>" + max + "</th><th>" + total + "</th><th></th></tr></table><p><strong>Percentage:</strong> " + pct + "% &nbsp; <strong>Result:</strong> " + (pass ? "PASS" : "FAIL") + " &nbsp; <strong>Grade:</strong> " + grade + "</p>";
+});
+</script></body></html>

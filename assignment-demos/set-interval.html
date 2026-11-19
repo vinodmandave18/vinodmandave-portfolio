@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>setInterval() and clearInterval() | Lab Assignment 15</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 15</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 15</p><h1>setInterval() and clearInterval()</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program demonstrating the use of setInterval() and clearInterval().</p>
+<section class="card">
+<div class="big" id="counter">0</div>
+<p id="clock"></p>
+<button id="start">Start</button><button id="stop" class="alt">Stop (clearInterval)</button><button id="reset" class="alt">Reset</button>
+<div id="msg" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;big&quot; id=&quot;counter&quot;&gt;0&lt;/div&gt;
+&lt;p id=&quot;clock&quot;&gt;&lt;/p&gt;
+&lt;button id=&quot;start&quot;&gt;Start&lt;/button&gt;&lt;button id=&quot;stop&quot; class=&quot;alt&quot;&gt;Stop (clearInterval)&lt;/button&gt;&lt;button id=&quot;reset&quot; class=&quot;alt&quot;&gt;Reset&lt;/button&gt;
+&lt;div id=&quot;msg&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+let timer = null, count = 0;
+const $ = id =&gt; document.getElementById(id);
+function say(t) { $(&quot;msg&quot;).className = &quot;msg show ok&quot;; $(&quot;msg&quot;).textContent = t; }
+$(&quot;start&quot;).onclick = function () {
+  if (timer !== null) { say(&quot;Already running.&quot;); return; }
+  timer = setInterval(function () {
+    count++;
+    $(&quot;counter&quot;).textContent = count;
+    $(&quot;clock&quot;).textContent = &quot;Tick at &quot; + new Date().toLocaleTimeString();
+  }, 1000);
+  say(&quot;setInterval started: runs every 1000 ms.&quot;);
+};
+$(&quot;stop&quot;).onclick = function () {
+  clearInterval(timer);
+  timer = null;
+  say(&quot;clearInterval called: counter stopped at &quot; + count + &quot;.&quot;);
+};
+$(&quot;reset&quot;).onclick = function () { clearInterval(timer); timer = null; count = 0; $(&quot;counter&quot;).textContent = 0; $(&quot;clock&quot;).textContent = &quot;&quot;; say(&quot;Reset.&quot;); };
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/14/index.html" target="_top">&larr; Factorial of a number</a><a href="../assignments/16/index.html" target="_top">Fibonacci series (page 1 of 2) &rarr;</a></nav></main>
+<script>
+let timer = null, count = 0;
+const $ = id => document.getElementById(id);
+function say(t) { $("msg").className = "msg show ok"; $("msg").textContent = t; }
+$("start").onclick = function () {
+  if (timer !== null) { say("Already running."); return; }
+  timer = setInterval(function () {
+    count++;
+    $("counter").textContent = count;
+    $("clock").textContent = "Tick at " + new Date().toLocaleTimeString();
+  }, 1000);
+  say("setInterval started: runs every 1000 ms.");
+};
+$("stop").onclick = function () {
+  clearInterval(timer);
+  timer = null;
+  say("clearInterval called: counter stopped at " + count + ".");
+};
+$("reset").onclick = function () { clearInterval(timer); timer = null; count = 0; $("counter").textContent = 0; $("clock").textContent = ""; say("Reset."); };
+</script></body></html>

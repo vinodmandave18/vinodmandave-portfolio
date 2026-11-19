@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mouse events | Lab Assignment 11</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 11</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 11</p><h1>Mouse events</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program demonstrating mouseup, onclick, dblclick, and mouseover events.</p>
+<section class="card">
+<div class="box" id="box" onmouseup="log('mouseup')" onclick="log('onclick')" ondblclick="log('dblclick')" onmouseover="log('mouseover')">
+  <div><strong>Interact with this box</strong><br>Hover, click, double-click or release the mouse button</div>
+</div>
+<div class="log" id="log">Events will appear here...</div>
+<button class="alt" onclick="document.getElementById('log').innerHTML=''">Clear log</button>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;box&quot; id=&quot;box&quot; onmouseup=&quot;log(&#x27;mouseup&#x27;)&quot; onclick=&quot;log(&#x27;onclick&#x27;)&quot; ondblclick=&quot;log(&#x27;dblclick&#x27;)&quot; onmouseover=&quot;log(&#x27;mouseover&#x27;)&quot;&gt;
+  &lt;div&gt;&lt;strong&gt;Interact with this box&lt;/strong&gt;&lt;br&gt;Hover, click, double-click or release the mouse button&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;log&quot; id=&quot;log&quot;&gt;Events will appear here...&lt;/div&gt;
+&lt;button class=&quot;alt&quot; onclick=&quot;document.getElementById(&#x27;log&#x27;).innerHTML=&#x27;&#x27;&quot;&gt;Clear log&lt;/button&gt;
+
+&lt;script&gt;
+let n = 0;
+function log(name) {
+  n++;
+  const box = document.getElementById(&quot;box&quot;);
+  const colours = {mouseup:&quot;#fff4d6&quot;, onclick:&quot;#e2f5e9&quot;, dblclick:&quot;#fde4e4&quot;, mouseover:&quot;#e5ecff&quot;};
+  box.style.background = colours[name];
+  const l = document.getElementById(&quot;log&quot;);
+  if (n === 1) l.innerHTML = &quot;&quot;;
+  l.innerHTML = &quot;&lt;div&gt;&quot; + n + &quot;. &quot; + name + &quot; event fired at &quot; + new Date().toLocaleTimeString() + &quot;&lt;/div&gt;&quot; + l.innerHTML;
+}
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/10/index.html" target="_top">&larr; Functions with parameter passing</a><a href="../assignments/12/index.html" target="_top">Current date and time &rarr;</a></nav></main>
+<script>
+let n = 0;
+function log(name) {
+  n++;
+  const box = document.getElementById("box");
+  const colours = {mouseup:"#fff4d6", onclick:"#e2f5e9", dblclick:"#fde4e4", mouseover:"#e5ecff"};
+  box.style.background = colours[name];
+  const l = document.getElementById("log");
+  if (n === 1) l.innerHTML = "";
+  l.innerHTML = "<div>" + n + ". " + name + " event fired at " + new Date().toLocaleTimeString() + "</div>" + l.innerHTML;
+}
+</script></body></html>

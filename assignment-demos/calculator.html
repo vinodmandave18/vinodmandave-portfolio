@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Basic calculator | Lab Assignment 9</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 9</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 9</p><h1>Basic calculator</h1>
+<p class="q"><strong>Question:</strong> Create a calculator using JavaScript to perform basic arithmetic operations.</p>
+<section class="card">
+<div class="calc">
+  <input id="display" value="0" readonly aria-label="Display">
+  <div class="keys" id="keys"></div>
+</div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;calc&quot;&gt;
+  &lt;input id=&quot;display&quot; value=&quot;0&quot; readonly aria-label=&quot;Display&quot;&gt;
+  &lt;div class=&quot;keys&quot; id=&quot;keys&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const display = document.getElementById(&quot;display&quot;);
+let current = &quot;0&quot;, previous = null, operator = null, fresh = true;
+const layout = [&quot;C&quot;,&quot;+/-&quot;,&quot;%&quot;,&quot;/&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;*&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;-&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;+&quot;,&quot;0&quot;,&quot;.&quot;,&quot;DEL&quot;,&quot;=&quot;];
+const keys = document.getElementById(&quot;keys&quot;);
+layout.forEach(k =&gt; {
+  const b = document.createElement(&quot;button&quot;);
+  b.textContent = k;
+  b.className = &quot;/*-+=&quot;.includes(k) ? &quot;op&quot; : (/[0-9.]/.test(k) ? &quot;num&quot; : &quot;alt&quot;);
+  b.addEventListener(&quot;click&quot;, () =&gt; press(k));
+  keys.appendChild(b);
+});
+function compute(a, b, op) {
+  if (op === &quot;+&quot;) return a + b;
+  if (op === &quot;-&quot;) return a - b;
+  if (op === &quot;*&quot;) return a * b;
+  if (op === &quot;/&quot;) return b === 0 ? &quot;Error&quot; : a / b;
+  return b;
+}
+function press(k) {
+  if (current === &quot;Error&quot;) { current = &quot;0&quot;; fresh = true; }
+  if (/[0-9]/.test(k)) { current = (fresh || current === &quot;0&quot;) ? k : current + k; fresh = false; }
+  else if (k === &quot;.&quot;) { if (fresh) { current = &quot;0.&quot;; fresh = false; } else if (!current.includes(&quot;.&quot;)) current += &quot;.&quot;; }
+  else if (k === &quot;C&quot;) { current = &quot;0&quot;; previous = null; operator = null; fresh = true; }
+  else if (k === &quot;DEL&quot;) { current = current.length &gt; 1 ? current.slice(0, -1) : &quot;0&quot;; }
+  else if (k === &quot;+/-&quot;) { current = String(-Number(current)); }
+  else if (k === &quot;%&quot;) { current = String(Number(current) / 100); }
+  else if (k === &quot;=&quot;) {
+    if (operator !== null) { current = String(compute(previous, Number(current), operator)); previous = null; operator = null; fresh = true; }
+  } else {
+    if (operator !== null &amp;&amp; !fresh) { current = String(compute(previous, Number(current), operator)); }
+    previous = Number(current); operator = k; fresh = true;
+  }
+  if (current !== &quot;Error&quot; &amp;&amp; current.length &gt; 12) current = String(Number(current).toPrecision(10) / 1);
+  display.value = current;
+}
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/8/index.html" target="_top">&larr; Multiplication tables 1 to 30</a><a href="../assignments/10/index.html" target="_top">Functions with parameter passing &rarr;</a></nav></main>
+<script>
+const display = document.getElementById("display");
+let current = "0", previous = null, operator = null, fresh = true;
+const layout = ["C","+/-","%","/","7","8","9","*","4","5","6","-","1","2","3","+","0",".","DEL","="];
+const keys = document.getElementById("keys");
+layout.forEach(k => {
+  const b = document.createElement("button");
+  b.textContent = k;
+  b.className = "/*-+=".includes(k) ? "op" : (/[0-9.]/.test(k) ? "num" : "alt");
+  b.addEventListener("click", () => press(k));
+  keys.appendChild(b);
+});
+function compute(a, b, op) {
+  if (op === "+") return a + b;
+  if (op === "-") return a - b;
+  if (op === "*") return a * b;
+  if (op === "/") return b === 0 ? "Error" : a / b;
+  return b;
+}
+function press(k) {
+  if (current === "Error") { current = "0"; fresh = true; }
+  if (/[0-9]/.test(k)) { current = (fresh || current === "0") ? k : current + k; fresh = false; }
+  else if (k === ".") { if (fresh) { current = "0."; fresh = false; } else if (!current.includes(".")) current += "."; }
+  else if (k === "C") { current = "0"; previous = null; operator = null; fresh = true; }
+  else if (k === "DEL") { current = current.length > 1 ? current.slice(0, -1) : "0"; }
+  else if (k === "+/-") { current = String(-Number(current)); }
+  else if (k === "%") { current = String(Number(current) / 100); }
+  else if (k === "=") {
+    if (operator !== null) { current = String(compute(previous, Number(current), operator)); previous = null; operator = null; fresh = true; }
+  } else {
+    if (operator !== null && !fresh) { current = String(compute(previous, Number(current), operator)); }
+    previous = Number(current); operator = k; fresh = true;
+  }
+  if (current !== "Error" && current.length > 12) current = String(Number(current).toPrecision(10) / 1);
+  display.value = current;
+}
+</script></body></html>

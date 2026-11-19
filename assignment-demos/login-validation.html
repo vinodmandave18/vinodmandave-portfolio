@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login page validation | Lab Assignment 13</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 13</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 13</p><h1>Login page validation</h1>
+<p class="q"><strong>Question:</strong> Create a login page with username and password fields. Check whether the input fields are blank and display appropriate messages.</p>
+<section class="card">
+<form id="loginForm" novalidate style="max-width:380px">
+  <label for="user">Username</label><input id="user" autocomplete="off">
+  <label for="pwd">Password</label><input id="pwd" type="password">
+  <button type="submit">Login</button>
+</form>
+<div id="msg" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;form id=&quot;loginForm&quot; novalidate style=&quot;max-width:380px&quot;&gt;
+  &lt;label for=&quot;user&quot;&gt;Username&lt;/label&gt;&lt;input id=&quot;user&quot; autocomplete=&quot;off&quot;&gt;
+  &lt;label for=&quot;pwd&quot;&gt;Password&lt;/label&gt;&lt;input id=&quot;pwd&quot; type=&quot;password&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id=&quot;msg&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+document.getElementById(&quot;loginForm&quot;).addEventListener(&quot;submit&quot;, function (e) {
+  e.preventDefault();
+  const u = document.getElementById(&quot;user&quot;).value.trim();
+  const p = document.getElementById(&quot;pwd&quot;).value;
+  const m = document.getElementById(&quot;msg&quot;);
+  m.className = &quot;msg show err&quot;;
+  if (u === &quot;&quot; &amp;&amp; p === &quot;&quot;) m.textContent = &quot;Username and password are blank. Please fill both fields.&quot;;
+  else if (u === &quot;&quot;) m.textContent = &quot;Username cannot be blank.&quot;;
+  else if (p === &quot;&quot;) m.textContent = &quot;Password cannot be blank.&quot;;
+  else { m.className = &quot;msg show ok&quot;; m.textContent = &quot;Login successful. Welcome, &quot; + u + &quot;!&quot;; }
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/12/index.html" target="_top">&larr; Current date and time</a><a href="../assignments/14/index.html" target="_top">Factorial of a number &rarr;</a></nav></main>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const u = document.getElementById("user").value.trim();
+  const p = document.getElementById("pwd").value;
+  const m = document.getElementById("msg");
+  m.className = "msg show err";
+  if (u === "" && p === "") m.textContent = "Username and password are blank. Please fill both fields.";
+  else if (u === "") m.textContent = "Username cannot be blank.";
+  else if (p === "") m.textContent = "Password cannot be blank.";
+  else { m.className = "msg show ok"; m.textContent = "Login successful. Welcome, " + u + "!"; }
+});
+</script></body></html>

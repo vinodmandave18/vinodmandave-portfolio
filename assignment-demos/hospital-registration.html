@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hospital registration form | Lab Assignment 3</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 3</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 3</p><h1>Hospital registration form</h1>
+<p class="q"><strong>Question:</strong> Design a hospital registration form using HTML and JavaScript.</p>
+<section class="card">
+<form id="hForm" novalidate>
+  <div class="row">
+    <div><label for="pname">Patient name</label><input id="pname"></div>
+    <div><label for="age">Age</label><input id="age" type="number" min="0" max="120"></div>
+  </div>
+  <div class="row">
+    <div><label for="phone">Mobile number</label><input id="phone" maxlength="10"></div>
+    <div><label for="blood">Blood group</label>
+      <select id="blood"><option value="">-- Select --</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+  </div>
+  <div class="row">
+    <div><label for="dept">Department</label>
+      <select id="dept"><option value="">-- Select --</option><option>General Medicine</option><option>Cardiology</option><option>Orthopedics</option><option>Pediatrics</option><option>ENT</option></select></div>
+    <div><label for="adate">Appointment date</label><input id="adate" type="date"></div>
+  </div>
+  <label>Gender</label>
+  <label class="inline"><input type="radio" name="g" value="Male">Male</label>
+  <label class="inline"><input type="radio" name="g" value="Female">Female</label>
+  <label class="inline"><input type="radio" name="g" value="Other">Other</label>
+  <label for="symptoms">Symptoms / reason for visit</label><textarea id="symptoms" rows="3"></textarea>
+  <button type="submit">Register patient</button><button type="reset" class="alt">Reset</button>
+</form>
+<div id="msg" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;form id=&quot;hForm&quot; novalidate&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;pname&quot;&gt;Patient name&lt;/label&gt;&lt;input id=&quot;pname&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;age&quot;&gt;Age&lt;/label&gt;&lt;input id=&quot;age&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;120&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;phone&quot;&gt;Mobile number&lt;/label&gt;&lt;input id=&quot;phone&quot; maxlength=&quot;10&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;blood&quot;&gt;Blood group&lt;/label&gt;
+      &lt;select id=&quot;blood&quot;&gt;&lt;option value=&quot;&quot;&gt;-- Select --&lt;/option&gt;&lt;option&gt;A+&lt;/option&gt;&lt;option&gt;A-&lt;/option&gt;&lt;option&gt;B+&lt;/option&gt;&lt;option&gt;B-&lt;/option&gt;&lt;option&gt;AB+&lt;/option&gt;&lt;option&gt;AB-&lt;/option&gt;&lt;option&gt;O+&lt;/option&gt;&lt;option&gt;O-&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;dept&quot;&gt;Department&lt;/label&gt;
+      &lt;select id=&quot;dept&quot;&gt;&lt;option value=&quot;&quot;&gt;-- Select --&lt;/option&gt;&lt;option&gt;General Medicine&lt;/option&gt;&lt;option&gt;Cardiology&lt;/option&gt;&lt;option&gt;Orthopedics&lt;/option&gt;&lt;option&gt;Pediatrics&lt;/option&gt;&lt;option&gt;ENT&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;adate&quot;&gt;Appointment date&lt;/label&gt;&lt;input id=&quot;adate&quot; type=&quot;date&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;label&gt;Gender&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;g&quot; value=&quot;Male&quot;&gt;Male&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;g&quot; value=&quot;Female&quot;&gt;Female&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;g&quot; value=&quot;Other&quot;&gt;Other&lt;/label&gt;
+  &lt;label for=&quot;symptoms&quot;&gt;Symptoms / reason for visit&lt;/label&gt;&lt;textarea id=&quot;symptoms&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+  &lt;button type=&quot;submit&quot;&gt;Register patient&lt;/button&gt;&lt;button type=&quot;reset&quot; class=&quot;alt&quot;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id=&quot;msg&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const $ = id =&gt; document.getElementById(id);
+$(&quot;adate&quot;).min = new Date().toISOString().split(&quot;T&quot;)[0];
+$(&quot;hForm&quot;).addEventListener(&quot;submit&quot;, function (e) {
+  e.preventDefault();
+  const m = $(&quot;msg&quot;);
+  const g = document.querySelector(&#x27;input[name=&quot;g&quot;]:checked&#x27;);
+  const age = Number($(&quot;age&quot;).value);
+  let error = &quot;&quot;;
+  if ($(&quot;pname&quot;).value.trim() === &quot;&quot;) error = &quot;Patient name is required.&quot;;
+  else if (!age || age &lt; 0 || age &gt; 120) error = &quot;Enter a valid age (1-120).&quot;;
+  else if (!g) error = &quot;Select a gender.&quot;;
+  else if (!/^[6-9][0-9]{9}$/.test($(&quot;phone&quot;).value)) error = &quot;Enter a valid 10-digit mobile number.&quot;;
+  else if ($(&quot;blood&quot;).value === &quot;&quot;) error = &quot;Select a blood group.&quot;;
+  else if ($(&quot;dept&quot;).value === &quot;&quot;) error = &quot;Select a department.&quot;;
+  else if ($(&quot;adate&quot;).value === &quot;&quot;) error = &quot;Select an appointment date.&quot;;
+  if (error) { m.className = &quot;msg show err&quot;; m.textContent = error; return; }
+  const id = &quot;HSP&quot; + Math.floor(1000 + Math.random() * 9000);
+  m.className = &quot;msg show ok&quot;;
+  m.textContent = &quot;Registered! Patient ID: &quot; + id + &quot; | &quot; + $(&quot;pname&quot;).value.trim() + &quot;, &quot; + age + &quot; yrs | &quot; + $(&quot;dept&quot;).value + &quot; on &quot; + $(&quot;adate&quot;).value;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/2/index.html" target="_top">&larr; Website registration form</a><a href="../assignments/4/index.html" target="_top">Student marksheet by seat number &rarr;</a></nav></main>
+<script>
+const $ = id => document.getElementById(id);
+$("adate").min = new Date().toISOString().split("T")[0];
+$("hForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const m = $("msg");
+  const g = document.querySelector('input[name="g"]:checked');
+  const age = Number($("age").value);
+  let error = "";
+  if ($("pname").value.trim() === "") error = "Patient name is required.";
+  else if (!age || age < 0 || age > 120) error = "Enter a valid age (1-120).";
+  else if (!g) error = "Select a gender.";
+  else if (!/^[6-9][0-9]{9}$/.test($("phone").value)) error = "Enter a valid 10-digit mobile number.";
+  else if ($("blood").value === "") error = "Select a blood group.";
+  else if ($("dept").value === "") error = "Select a department.";
+  else if ($("adate").value === "") error = "Select an appointment date.";
+  if (error) { m.className = "msg show err"; m.textContent = error; return; }
+  const id = "HSP" + Math.floor(1000 + Math.random() * 9000);
+  m.className = "msg show ok";
+  m.textContent = "Registered! Patient ID: " + id + " | " + $("pname").value.trim() + ", " + age + " yrs | " + $("dept").value + " on " + $("adate").value;
+});
+</script></body></html>

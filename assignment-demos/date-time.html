@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Current date and time | Lab Assignment 12</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 12</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 12</p><h1>Current date and time</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to display the current date and time in a message box.</p>
+<section class="card">
+<p>Click the button to open a message box showing the current date and time.</p>
+<button id="b">Show date and time</button>
+<div id="out" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;p&gt;Click the button to open a message box showing the current date and time.&lt;/p&gt;
+&lt;button id=&quot;b&quot;&gt;Show date and time&lt;/button&gt;
+&lt;div id=&quot;out&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+document.getElementById(&quot;b&quot;).addEventListener(&quot;click&quot;, function () {
+  const now = new Date();
+  const text = &quot;Date: &quot; + now.toDateString() + &quot;\nTime: &quot; + now.toLocaleTimeString();
+  alert(text);   // message box
+  const out = document.getElementById(&quot;out&quot;);
+  out.className = &quot;msg show ok&quot;;
+  out.textContent = now.toString();
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/11/index.html" target="_top">&larr; Mouse events</a><a href="../assignments/13/index.html" target="_top">Login page validation &rarr;</a></nav></main>
+<script>
+document.getElementById("b").addEventListener("click", function () {
+  const now = new Date();
+  const text = "Date: " + now.toDateString() + "\nTime: " + now.toLocaleTimeString();
+  alert(text);   // message box
+  const out = document.getElementById("out");
+  out.className = "msg show ok";
+  out.textContent = now.toString();
+});
+</script></body></html>

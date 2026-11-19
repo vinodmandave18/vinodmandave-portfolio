@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Website registration form | Lab Assignment 2</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 2</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 2</p><h1>Website registration form</h1>
+<p class="q"><strong>Question:</strong> Design a registration form for a website using HTML and JavaScript.</p>
+<section class="card">
+<form id="regForm" novalidate>
+  <label for="fullname">Full name</label><input id="fullname"><div class="err-text" id="e1"></div>
+  <label for="email">Email</label><input id="email" type="email"><div class="err-text" id="e2"></div>
+  <div class="row">
+    <div><label for="pass">Password</label><input id="pass" type="password"><div class="err-text" id="e3"></div></div>
+    <div><label for="cpass">Confirm password</label><input id="cpass" type="password"><div class="err-text" id="e4"></div></div>
+  </div>
+  <div class="row">
+    <div><label for="dob">Date of birth</label><input id="dob" type="date"><div class="err-text" id="e5"></div></div>
+    <div><label for="country">Country</label>
+      <select id="country"><option value="">-- Select --</option><option>India</option><option>USA</option><option>UK</option><option>Other</option></select>
+      <div class="err-text" id="e6"></div></div>
+  </div>
+  <label>Gender</label>
+  <label class="inline"><input type="radio" name="gender" value="Male">Male</label>
+  <label class="inline"><input type="radio" name="gender" value="Female">Female</label>
+  <label class="inline"><input type="radio" name="gender" value="Other">Other</label>
+  <div class="err-text" id="e7"></div>
+  <label class="inline"><input type="checkbox" id="terms">I agree to the terms and conditions</label><div class="err-text" id="e8"></div>
+  <button type="submit">Register</button><button type="reset" class="alt">Reset</button>
+</form>
+<div id="msg" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;form id=&quot;regForm&quot; novalidate&gt;
+  &lt;label for=&quot;fullname&quot;&gt;Full name&lt;/label&gt;&lt;input id=&quot;fullname&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e1&quot;&gt;&lt;/div&gt;
+  &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;email&quot; type=&quot;email&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e2&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;pass&quot;&gt;Password&lt;/label&gt;&lt;input id=&quot;pass&quot; type=&quot;password&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e3&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;cpass&quot;&gt;Confirm password&lt;/label&gt;&lt;input id=&quot;cpass&quot; type=&quot;password&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e4&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;dob&quot;&gt;Date of birth&lt;/label&gt;&lt;input id=&quot;dob&quot; type=&quot;date&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e5&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;country&quot;&gt;Country&lt;/label&gt;
+      &lt;select id=&quot;country&quot;&gt;&lt;option value=&quot;&quot;&gt;-- Select --&lt;/option&gt;&lt;option&gt;India&lt;/option&gt;&lt;option&gt;USA&lt;/option&gt;&lt;option&gt;UK&lt;/option&gt;&lt;option&gt;Other&lt;/option&gt;&lt;/select&gt;
+      &lt;div class=&quot;err-text&quot; id=&quot;e6&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;label&gt;Gender&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;Male&quot;&gt;Male&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;Female&quot;&gt;Female&lt;/label&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;Other&quot;&gt;Other&lt;/label&gt;
+  &lt;div class=&quot;err-text&quot; id=&quot;e7&quot;&gt;&lt;/div&gt;
+  &lt;label class=&quot;inline&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;terms&quot;&gt;I agree to the terms and conditions&lt;/label&gt;&lt;div class=&quot;err-text&quot; id=&quot;e8&quot;&gt;&lt;/div&gt;
+  &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;&lt;button type=&quot;reset&quot; class=&quot;alt&quot;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id=&quot;msg&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const $ = id =&gt; document.getElementById(id);
+function setErr(n, text) { $(&quot;e&quot; + n).textContent = text; return text !== &quot;&quot;; }
+$(&quot;regForm&quot;).addEventListener(&quot;submit&quot;, function (e) {
+  e.preventDefault();
+  let bad = false;
+  bad = setErr(1, $(&quot;fullname&quot;).value.trim() === &quot;&quot; ? &quot;Name is required&quot; : &quot;&quot;) || bad;
+  bad = setErr(2, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($(&quot;email&quot;).value) ? &quot;&quot; : &quot;Enter a valid email&quot;) || bad;
+  bad = setErr(3, $(&quot;pass&quot;).value.length &lt; 6 ? &quot;Password must be at least 6 characters&quot; : &quot;&quot;) || bad;
+  bad = setErr(4, $(&quot;cpass&quot;).value !== $(&quot;pass&quot;).value || $(&quot;cpass&quot;).value === &quot;&quot; ? &quot;Passwords do not match&quot; : &quot;&quot;) || bad;
+  bad = setErr(5, $(&quot;dob&quot;).value === &quot;&quot; ? &quot;Select your date of birth&quot; : &quot;&quot;) || bad;
+  bad = setErr(6, $(&quot;country&quot;).value === &quot;&quot; ? &quot;Select a country&quot; : &quot;&quot;) || bad;
+  bad = setErr(7, document.querySelector(&#x27;input[name=&quot;gender&quot;]:checked&#x27;) ? &quot;&quot; : &quot;Select a gender&quot;) || bad;
+  bad = setErr(8, $(&quot;terms&quot;).checked ? &quot;&quot; : &quot;You must accept the terms&quot;) || bad;
+  const m = $(&quot;msg&quot;);
+  if (bad) { m.className = &quot;msg show err&quot;; m.textContent = &quot;Please correct the errors above.&quot;; }
+  else { m.className = &quot;msg show ok&quot;; m.textContent = &quot;Registration successful. Welcome, &quot; + $(&quot;fullname&quot;).value.trim() + &quot;!&quot;; }
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/1/index.html" target="_top">&larr; Online examination form</a><a href="../assignments/3/index.html" target="_top">Hospital registration form &rarr;</a></nav></main>
+<script>
+const $ = id => document.getElementById(id);
+function setErr(n, text) { $("e" + n).textContent = text; return text !== ""; }
+$("regForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  let bad = false;
+  bad = setErr(1, $("fullname").value.trim() === "" ? "Name is required" : "") || bad;
+  bad = setErr(2, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value) ? "" : "Enter a valid email") || bad;
+  bad = setErr(3, $("pass").value.length < 6 ? "Password must be at least 6 characters" : "") || bad;
+  bad = setErr(4, $("cpass").value !== $("pass").value || $("cpass").value === "" ? "Passwords do not match" : "") || bad;
+  bad = setErr(5, $("dob").value === "" ? "Select your date of birth" : "") || bad;
+  bad = setErr(6, $("country").value === "" ? "Select a country" : "") || bad;
+  bad = setErr(7, document.querySelector('input[name="gender"]:checked') ? "" : "Select a gender") || bad;
+  bad = setErr(8, $("terms").checked ? "" : "You must accept the terms") || bad;
+  const m = $("msg");
+  if (bad) { m.className = "msg show err"; m.textContent = "Please correct the errors above."; }
+  else { m.className = "msg show ok"; m.textContent = "Registration successful. Welcome, " + $("fullname").value.trim() + "!"; }
+});
+</script></body></html>

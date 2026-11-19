@@ -1,0 +1,35 @@
+:root{--ink:#171717;--muted:#666;--line:#e5e5e5;--soft:#f7f7f7;--accent:#315efb;--ok:#137a4b;--err:#c62828}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.bar{display:flex;justify-content:space-between;gap:12px;padding:14px 22px;border-bottom:1px solid var(--line);font-size:.9rem;position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:5}
+.bar span{color:var(--muted)}
+.wrap{max-width:860px;margin:0 auto;padding:36px 20px 60px}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted);margin:0}
+h1{margin:8px 0 14px;font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.04em;line-height:1.1}
+.q{padding:14px 16px;background:var(--soft);border:1px solid var(--line);border-radius:12px;color:#444;margin:0 0 22px;font-size:.95rem}
+.card{border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px}
+label{display:block;font-size:.88rem;font-weight:650;margin:14px 0 5px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid #d4d4d4;border-radius:9px;font:inherit;background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+input[type=radio],input[type=checkbox]{width:auto;margin-right:8px}
+.inline{display:flex;align-items:center;gap:6px;font-weight:500;margin:6px 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button,.btn{display:inline-block;padding:10px 18px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:#fff;font:inherit;font-weight:650;cursor:pointer;margin:14px 8px 0 0;text-decoration:none}
+button:hover,.btn:hover{background:#333;text-decoration:none}
+button.alt,.btn.alt{background:#fff;color:var(--ink);border-color:#cfcfcf}button.alt:hover,.btn.alt:hover{background:var(--soft)}
+.msg{margin-top:16px;padding:12px 14px;border-radius:10px;font-size:.92rem;display:none}
+.msg.show{display:block}.msg.ok{background:#e8f6ee;color:var(--ok);border:1px solid #bfe3cf}.msg.err{background:#fdecec;color:var(--err);border:1px solid #f4c4c4}
+.err-text{color:var(--err);font-size:.8rem;min-height:1em}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:12px}th,td{padding:9px 10px;border:1px solid var(--line);text-align:left}th{background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-weight:600;font-size:.9rem}
+.tables{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.tables div{border:1px solid var(--line);border-radius:10px;padding:10px;font-size:.85rem}.tables h4{margin:0 0 6px}
+.calc{max-width:300px;margin:auto}.calc input{text-align:right;font-size:1.6rem;margin-bottom:10px}.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.keys button{margin:0;border-radius:12px;padding:14px 0;font-size:1.1rem}.keys .op{background:var(--accent);border-color:var(--accent)}.keys .num{background:#fff;color:var(--ink);border-color:#d4d4d4}
+.box{height:140px;border:2px dashed #bbb;border-radius:14px;display:grid;place-items:center;text-align:center;cursor:pointer;user-select:none;transition:background .2s}
+.box:hover{background:#eef2ff}
+.log{max-height:200px;overflow:auto;margin-top:12px;font-family:ui-monospace,Menlo,monospace;font-size:.85rem;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--soft)}
+.big{font-size:2.4rem;font-weight:800;letter-spacing:-.03em}
+details.code{border:1px solid var(--line);border-radius:14px;padding:4px 16px;margin-bottom:20px}summary{cursor:pointer;font-weight:650;padding:12px 0}
+pre{overflow:auto;background:#111;color:#e8e8e8;padding:16px;border-radius:10px;font-size:.8rem;line-height:1.5;margin:0 0 14px}
+.pager{display:flex;justify-content:space-between;gap:10px;font-size:.9rem}
+@media(max-width:560px){.row{grid-template-columns:1fr}}

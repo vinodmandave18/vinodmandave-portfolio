@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student registration validation | Lab Assignment 20</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 20</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 20</p><h1>Student registration validation</h1>
+<p class="q"><strong>Question:</strong> Create a student registration form and validate required fields, email address, and mobile number using JavaScript.</p>
+<section class="card">
+<form id="sForm" novalidate>
+  <div class="row">
+    <div><label for="fn">First name</label><input id="fn"><div class="err-text" id="e1"></div></div>
+    <div><label for="ln">Last name</label><input id="ln"><div class="err-text" id="e2"></div></div>
+  </div>
+  <label for="em">Email address</label><input id="em"><div class="err-text" id="e3"></div>
+  <label for="mb">Mobile number</label><input id="mb" maxlength="10" placeholder="10 digits"><div class="err-text" id="e4"></div>
+  <div class="row">
+    <div><label for="course">Course</label>
+      <select id="course"><option value="">-- Select --</option><option>BBA</option><option>BCA</option><option>MBA</option><option>MCA</option></select>
+      <div class="err-text" id="e5"></div></div>
+    <div><label for="year">Year</label>
+      <select id="year"><option value="">-- Select --</option><option>First</option><option>Second</option><option>Third</option></select>
+      <div class="err-text" id="e6"></div></div>
+  </div>
+  <label for="addr">Address</label><textarea id="addr" rows="2"></textarea><div class="err-text" id="e7"></div>
+  <button type="submit">Register</button><button type="reset" class="alt">Reset</button>
+</form>
+<div id="msg" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;form id=&quot;sForm&quot; novalidate&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;fn&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;fn&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e1&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;ln&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;ln&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e2&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;label for=&quot;em&quot;&gt;Email address&lt;/label&gt;&lt;input id=&quot;em&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e3&quot;&gt;&lt;/div&gt;
+  &lt;label for=&quot;mb&quot;&gt;Mobile number&lt;/label&gt;&lt;input id=&quot;mb&quot; maxlength=&quot;10&quot; placeholder=&quot;10 digits&quot;&gt;&lt;div class=&quot;err-text&quot; id=&quot;e4&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;course&quot;&gt;Course&lt;/label&gt;
+      &lt;select id=&quot;course&quot;&gt;&lt;option value=&quot;&quot;&gt;-- Select --&lt;/option&gt;&lt;option&gt;BBA&lt;/option&gt;&lt;option&gt;BCA&lt;/option&gt;&lt;option&gt;MBA&lt;/option&gt;&lt;option&gt;MCA&lt;/option&gt;&lt;/select&gt;
+      &lt;div class=&quot;err-text&quot; id=&quot;e5&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;year&quot;&gt;Year&lt;/label&gt;
+      &lt;select id=&quot;year&quot;&gt;&lt;option value=&quot;&quot;&gt;-- Select --&lt;/option&gt;&lt;option&gt;First&lt;/option&gt;&lt;option&gt;Second&lt;/option&gt;&lt;option&gt;Third&lt;/option&gt;&lt;/select&gt;
+      &lt;div class=&quot;err-text&quot; id=&quot;e6&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;label for=&quot;addr&quot;&gt;Address&lt;/label&gt;&lt;textarea id=&quot;addr&quot; rows=&quot;2&quot;&gt;&lt;/textarea&gt;&lt;div class=&quot;err-text&quot; id=&quot;e7&quot;&gt;&lt;/div&gt;
+  &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;&lt;button type=&quot;reset&quot; class=&quot;alt&quot;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id=&quot;msg&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const $ = id =&gt; document.getElementById(id);
+function err(n, t) { $(&quot;e&quot; + n).textContent = t; return t !== &quot;&quot;; }
+$(&quot;sForm&quot;).addEventListener(&quot;submit&quot;, function (e) {
+  e.preventDefault();
+  let bad = false;
+  bad = err(1, $(&quot;fn&quot;).value.trim() === &quot;&quot; ? &quot;First name is required&quot; : &quot;&quot;) || bad;
+  bad = err(2, $(&quot;ln&quot;).value.trim() === &quot;&quot; ? &quot;Last name is required&quot; : &quot;&quot;) || bad;
+  const email = $(&quot;em&quot;).value.trim();
+  bad = err(3, email === &quot;&quot; ? &quot;Email is required&quot; : (/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email) ? &quot;&quot; : &quot;Enter a valid email, e.g. name@example.com&quot;)) || bad;
+  const mob = $(&quot;mb&quot;).value.trim();
+  bad = err(4, mob === &quot;&quot; ? &quot;Mobile number is required&quot; : (/^[6-9][0-9]{9}$/.test(mob) ? &quot;&quot; : &quot;Enter a valid 10-digit mobile number starting with 6-9&quot;)) || bad;
+  bad = err(5, $(&quot;course&quot;).value === &quot;&quot; ? &quot;Select a course&quot; : &quot;&quot;) || bad;
+  bad = err(6, $(&quot;year&quot;).value === &quot;&quot; ? &quot;Select a year&quot; : &quot;&quot;) || bad;
+  bad = err(7, $(&quot;addr&quot;).value.trim() === &quot;&quot; ? &quot;Address is required&quot; : &quot;&quot;) || bad;
+  const m = $(&quot;msg&quot;);
+  if (bad) { m.className = &quot;msg show err&quot;; m.textContent = &quot;Please fix the highlighted fields.&quot;; }
+  else { m.className = &quot;msg show ok&quot;; m.textContent = &quot;Student &quot; + $(&quot;fn&quot;).value.trim() + &quot; &quot; + $(&quot;ln&quot;).value.trim() + &quot; registered successfully for &quot; + $(&quot;course&quot;).value + &quot;.&quot;; }
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/19/index.html" target="_top">&larr; Arithmetic operations using functions</a><a href="../assignments/21/index.html" target="_top">Replace letter m with a &rarr;</a></nav></main>
+<script>
+const $ = id => document.getElementById(id);
+function err(n, t) { $("e" + n).textContent = t; return t !== ""; }
+$("sForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  let bad = false;
+  bad = err(1, $("fn").value.trim() === "" ? "First name is required" : "") || bad;
+  bad = err(2, $("ln").value.trim() === "" ? "Last name is required" : "") || bad;
+  const email = $("em").value.trim();
+  bad = err(3, email === "" ? "Email is required" : (/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email) ? "" : "Enter a valid email, e.g. name@example.com")) || bad;
+  const mob = $("mb").value.trim();
+  bad = err(4, mob === "" ? "Mobile number is required" : (/^[6-9][0-9]{9}$/.test(mob) ? "" : "Enter a valid 10-digit mobile number starting with 6-9")) || bad;
+  bad = err(5, $("course").value === "" ? "Select a course" : "") || bad;
+  bad = err(6, $("year").value === "" ? "Select a year" : "") || bad;
+  bad = err(7, $("addr").value.trim() === "" ? "Address is required" : "") || bad;
+  const m = $("msg");
+  if (bad) { m.className = "msg show err"; m.textContent = "Please fix the highlighted fields."; }
+  else { m.className = "msg show ok"; m.textContent = "Student " + $("fn").value.trim() + " " + $("ln").value.trim() + " registered successfully for " + $("course").value + "."; }
+});
+</script></body></html>

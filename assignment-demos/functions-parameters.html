@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Functions with parameter passing | Lab Assignment 10</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 10</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 10</p><h1>Functions with parameter passing</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program demonstrating functions with parameter passing.</p>
+<section class="card">
+<div class="row">
+  <div><label for="n1">Number 1</label><input id="n1" type="number" value="6"></div>
+  <div><label for="n2">Number 2</label><input id="n2" type="number" value="3"></div>
+</div>
+<label for="nm">Name</label><input id="nm" value="Yash">
+<button id="b1">add(a, b)</button>
+<button id="b2" class="alt">power(base, exponent)</button>
+<button id="b3" class="alt">greet(name, times)</button>
+<div id="out" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;row&quot;&gt;
+  &lt;div&gt;&lt;label for=&quot;n1&quot;&gt;Number 1&lt;/label&gt;&lt;input id=&quot;n1&quot; type=&quot;number&quot; value=&quot;6&quot;&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;label for=&quot;n2&quot;&gt;Number 2&lt;/label&gt;&lt;input id=&quot;n2&quot; type=&quot;number&quot; value=&quot;3&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;label for=&quot;nm&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;nm&quot; value=&quot;Yash&quot;&gt;
+&lt;button id=&quot;b1&quot;&gt;add(a, b)&lt;/button&gt;
+&lt;button id=&quot;b2&quot; class=&quot;alt&quot;&gt;power(base, exponent)&lt;/button&gt;
+&lt;button id=&quot;b3&quot; class=&quot;alt&quot;&gt;greet(name, times)&lt;/button&gt;
+&lt;div id=&quot;out&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// Function with two parameters
+function add(a, b) { return a + b; }
+// Function with two parameters, using Math.pow
+function power(base, exponent) { return Math.pow(base, exponent); }
+// Function with a default parameter value
+function greet(name, times = 1) {
+  let s = &quot;&quot;;
+  for (let i = 0; i &lt; times; i++) s += &quot;Hello, &quot; + name + &quot;! &quot;;
+  return s;
+}
+const $ = id =&gt; document.getElementById(id);
+function show(t) { $(&quot;out&quot;).textContent = t; $(&quot;out&quot;).className = &quot;msg show ok&quot;; }
+$(&quot;b1&quot;).onclick = () =&gt; show(&quot;add(&quot; + $(&quot;n1&quot;).value + &quot;, &quot; + $(&quot;n2&quot;).value + &quot;) = &quot; + add(Number($(&quot;n1&quot;).value), Number($(&quot;n2&quot;).value)));
+$(&quot;b2&quot;).onclick = () =&gt; show(&quot;power(&quot; + $(&quot;n1&quot;).value + &quot;, &quot; + $(&quot;n2&quot;).value + &quot;) = &quot; + power(Number($(&quot;n1&quot;).value), Number($(&quot;n2&quot;).value)));
+$(&quot;b3&quot;).onclick = () =&gt; show(greet($(&quot;nm&quot;).value, Number($(&quot;n2&quot;).value) || 1));
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/9/index.html" target="_top">&larr; Basic calculator</a><a href="../assignments/11/index.html" target="_top">Mouse events &rarr;</a></nav></main>
+<script>
+// Function with two parameters
+function add(a, b) { return a + b; }
+// Function with two parameters, using Math.pow
+function power(base, exponent) { return Math.pow(base, exponent); }
+// Function with a default parameter value
+function greet(name, times = 1) {
+  let s = "";
+  for (let i = 0; i < times; i++) s += "Hello, " + name + "! ";
+  return s;
+}
+const $ = id => document.getElementById(id);
+function show(t) { $("out").textContent = t; $("out").className = "msg show ok"; }
+$("b1").onclick = () => show("add(" + $("n1").value + ", " + $("n2").value + ") = " + add(Number($("n1").value), Number($("n2").value)));
+$("b2").onclick = () => show("power(" + $("n1").value + ", " + $("n2").value + ") = " + power(Number($("n1").value), Number($("n2").value)));
+$("b3").onclick = () => show(greet($("nm").value, Number($("n2").value) || 1));
+</script></body></html>

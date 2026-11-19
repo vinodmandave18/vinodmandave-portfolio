@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fibonacci series (page 2 of 2) | Lab Assignment 16</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 16</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 16</p><h1>Fibonacci series (page 2 of 2)</h1>
+<p class="q"><strong>Question:</strong> Create two HTML pages. When the user clicks the Show button on the first page, display the first 10 terms of the Fibonacci series in a text box on the second page. Provide a Back button to return to the first page.</p>
+<section class="card">
+<p>This is <strong>page 2</strong>. First 10 terms of the Fibonacci series:</p>
+<label for="fib">Fibonacci series</label>
+<input id="fib" readonly>
+<a class="btn alt" id="back" href="fibonacci-start.html">&larr; Back</a>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;p&gt;This is &lt;strong&gt;page 2&lt;/strong&gt;. First 10 terms of the Fibonacci series:&lt;/p&gt;
+&lt;label for=&quot;fib&quot;&gt;Fibonacci series&lt;/label&gt;
+&lt;input id=&quot;fib&quot; readonly&gt;
+&lt;a class=&quot;btn alt&quot; id=&quot;back&quot; href=&quot;fibonacci-start.html&quot;&gt;&amp;larr; Back&lt;/a&gt;
+
+&lt;script&gt;
+let a = 0, b = 1, terms = [];
+for (let i = 0; i &lt; 10; i++) {
+  terms.push(a);
+  const next = a + b;
+  a = b;
+  b = next;
+}
+document.getElementById(&quot;fib&quot;).value = terms.join(&quot;, &quot;);
+document.getElementById(&quot;back&quot;).addEventListener(&quot;click&quot;, function (e) {
+  e.preventDefault();
+  window.location.href = &quot;fibonacci-start.html&quot;;   // return to the first page
+});
+&lt;/script&gt;</code></pre></details>
+</main>
+<script>
+let a = 0, b = 1, terms = [];
+for (let i = 0; i < 10; i++) {
+  terms.push(a);
+  const next = a + b;
+  a = b;
+  b = next;
+}
+document.getElementById("fib").value = terms.join(", ");
+document.getElementById("back").addEventListener("click", function (e) {
+  e.preventDefault();
+  window.location.href = "fibonacci-start.html";   // return to the first page
+});
+</script></body></html>

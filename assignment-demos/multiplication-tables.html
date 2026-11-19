@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Multiplication tables 1 to 30 | Lab Assignment 8</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 8</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 8</p><h1>Multiplication tables 1 to 30</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to display multiplication tables from 1 to 30 in an HTML page.</p>
+<section class="card">
+<div id="out" class="tables"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div id=&quot;out&quot; class=&quot;tables&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const out = document.getElementById(&quot;out&quot;);
+for (let n = 1; n &lt;= 30; n++) {
+  let html = &quot;&lt;div&gt;&lt;h4&gt;Table of &quot; + n + &quot;&lt;/h4&gt;&quot;;
+  for (let i = 1; i &lt;= 10; i++) {
+    html += n + &quot; x &quot; + i + &quot; = &quot; + (n * i) + &quot;&lt;br&gt;&quot;;
+  }
+  out.innerHTML += html + &quot;&lt;/div&gt;&quot;;
+}
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/7/index.html" target="_top">&larr; Prime numbers 1 to 100</a><a href="../assignments/9/index.html" target="_top">Basic calculator &rarr;</a></nav></main>
+<script>
+const out = document.getElementById("out");
+for (let n = 1; n <= 30; n++) {
+  let html = "<div><h4>Table of " + n + "</h4>";
+  for (let i = 1; i <= 10; i++) {
+    html += n + " x " + i + " = " + (n * i) + "<br>";
+  }
+  out.innerHTML += html + "</div>";
+}
+</script></body></html>

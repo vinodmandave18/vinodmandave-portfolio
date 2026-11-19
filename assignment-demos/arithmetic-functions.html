@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Arithmetic operations using functions | Lab Assignment 19</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 19</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 19</p><h1>Arithmetic operations using functions</h1>
+<p class="q"><strong>Question:</strong> Create a web page with two text boxes and JavaScript functions to perform addition, subtraction, multiplication, and division.</p>
+<section class="card">
+<div class="row">
+  <div><label for="a">First number</label><input id="a" type="number"></div>
+  <div><label for="b">Second number</label><input id="b" type="number"></div>
+</div>
+<button onclick="calc('add')">Add</button><button onclick="calc('sub')" class="alt">Subtract</button>
+<button onclick="calc('mul')" class="alt">Multiply</button><button onclick="calc('div')" class="alt">Divide</button>
+<div id="out" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;row&quot;&gt;
+  &lt;div&gt;&lt;label for=&quot;a&quot;&gt;First number&lt;/label&gt;&lt;input id=&quot;a&quot; type=&quot;number&quot;&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;label for=&quot;b&quot;&gt;Second number&lt;/label&gt;&lt;input id=&quot;b&quot; type=&quot;number&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;button onclick=&quot;calc(&#x27;add&#x27;)&quot;&gt;Add&lt;/button&gt;&lt;button onclick=&quot;calc(&#x27;sub&#x27;)&quot; class=&quot;alt&quot;&gt;Subtract&lt;/button&gt;
+&lt;button onclick=&quot;calc(&#x27;mul&#x27;)&quot; class=&quot;alt&quot;&gt;Multiply&lt;/button&gt;&lt;button onclick=&quot;calc(&#x27;div&#x27;)&quot; class=&quot;alt&quot;&gt;Divide&lt;/button&gt;
+&lt;div id=&quot;out&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+function addition(a, b) { return a + b; }
+function subtraction(a, b) { return a - b; }
+function multiplication(a, b) { return a * b; }
+function division(a, b) { return a / b; }
+function calc(op) {
+  const sa = document.getElementById(&quot;a&quot;).value, sb = document.getElementById(&quot;b&quot;).value;
+  const out = document.getElementById(&quot;out&quot;);
+  if (sa === &quot;&quot; || sb === &quot;&quot;) { out.className = &quot;msg show err&quot;; out.textContent = &quot;Please enter both numbers.&quot;; return; }
+  const a = Number(sa), b = Number(sb);
+  let r, sym;
+  if (op === &quot;add&quot;) { r = addition(a, b); sym = &quot;+&quot;; }
+  else if (op === &quot;sub&quot;) { r = subtraction(a, b); sym = &quot;-&quot;; }
+  else if (op === &quot;mul&quot;) { r = multiplication(a, b); sym = &quot;x&quot;; }
+  else {
+    if (b === 0) { out.className = &quot;msg show err&quot;; out.textContent = &quot;Cannot divide by zero.&quot;; return; }
+    r = division(a, b); sym = &quot;/&quot;;
+  }
+  out.className = &quot;msg show ok&quot;;
+  out.textContent = a + &quot; &quot; + sym + &quot; &quot; + b + &quot; = &quot; + r;
+}
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/18/index.html" target="_top">&larr; Maximum of two numbers</a><a href="../assignments/20/index.html" target="_top">Student registration validation &rarr;</a></nav></main>
+<script>
+function addition(a, b) { return a + b; }
+function subtraction(a, b) { return a - b; }
+function multiplication(a, b) { return a * b; }
+function division(a, b) { return a / b; }
+function calc(op) {
+  const sa = document.getElementById("a").value, sb = document.getElementById("b").value;
+  const out = document.getElementById("out");
+  if (sa === "" || sb === "") { out.className = "msg show err"; out.textContent = "Please enter both numbers."; return; }
+  const a = Number(sa), b = Number(sb);
+  let r, sym;
+  if (op === "add") { r = addition(a, b); sym = "+"; }
+  else if (op === "sub") { r = subtraction(a, b); sym = "-"; }
+  else if (op === "mul") { r = multiplication(a, b); sym = "x"; }
+  else {
+    if (b === 0) { out.className = "msg show err"; out.textContent = "Cannot divide by zero."; return; }
+    r = division(a, b); sym = "/";
+  }
+  out.className = "msg show ok";
+  out.textContent = a + " " + sym + " " + b + " = " + r;
+}
+</script></body></html>

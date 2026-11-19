@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Maximum of two numbers | Lab Assignment 18</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 18</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 18</p><h1>Maximum of two numbers</h1>
+<p class="q"><strong>Question:</strong> Create a web page with two text boxes to accept numbers and display the maximum of the two numbers.</p>
+<section class="card">
+<div class="row">
+  <div><label for="a">First number</label><input id="a" type="number"></div>
+  <div><label for="b">Second number</label><input id="b" type="number"></div>
+</div>
+<button id="go">Find maximum</button>
+<div id="out" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div class=&quot;row&quot;&gt;
+  &lt;div&gt;&lt;label for=&quot;a&quot;&gt;First number&lt;/label&gt;&lt;input id=&quot;a&quot; type=&quot;number&quot;&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;label for=&quot;b&quot;&gt;Second number&lt;/label&gt;&lt;input id=&quot;b&quot; type=&quot;number&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;button id=&quot;go&quot;&gt;Find maximum&lt;/button&gt;
+&lt;div id=&quot;out&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+function maximum(x, y) { return x &gt; y ? x : y; }
+document.getElementById(&quot;go&quot;).addEventListener(&quot;click&quot;, function () {
+  const a = document.getElementById(&quot;a&quot;).value, b = document.getElementById(&quot;b&quot;).value;
+  const out = document.getElementById(&quot;out&quot;);
+  if (a === &quot;&quot; || b === &quot;&quot; || isNaN(a) || isNaN(b)) {
+    out.className = &quot;msg show err&quot;; out.textContent = &quot;Please enter two valid numbers.&quot;; return;
+  }
+  const x = Number(a), y = Number(b);
+  out.className = &quot;msg show ok&quot;;
+  out.textContent = x === y ? &quot;Both numbers are equal: &quot; + x : &quot;Maximum of &quot; + x + &quot; and &quot; + y + &quot; is &quot; + maximum(x, y);
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/17/index.html" target="_top">&larr; Dropdown to text box (max 10)</a><a href="../assignments/19/index.html" target="_top">Arithmetic operations using functions &rarr;</a></nav></main>
+<script>
+function maximum(x, y) { return x > y ? x : y; }
+document.getElementById("go").addEventListener("click", function () {
+  const a = document.getElementById("a").value, b = document.getElementById("b").value;
+  const out = document.getElementById("out");
+  if (a === "" || b === "" || isNaN(a) || isNaN(b)) {
+    out.className = "msg show err"; out.textContent = "Please enter two valid numbers."; return;
+  }
+  const x = Number(a), y = Number(b);
+  out.className = "msg show ok";
+  out.textContent = x === y ? "Both numbers are equal: " + x : "Maximum of " + x + " and " + y + " is " + maximum(x, y);
+});
+</script></body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Online examination form | Lab Assignment 1</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 1</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 1</p><h1>Online examination form</h1>
+<p class="q"><strong>Question:</strong> Design an online examination form using HTML and JavaScript.</p>
+<section class="card">
+<form id="examForm" novalidate>
+  <div class="row">
+    <div><label for="sname">Student name</label><input id="sname" placeholder="Full name"></div>
+    <div><label for="roll">Roll number</label><input id="roll" placeholder="e.g. 101"></div>
+  </div>
+  <div id="questions"></div>
+  <button type="submit">Submit exam</button>
+  <button type="reset" class="alt" id="resetBtn">Reset</button>
+</form>
+<div id="result" class="msg"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;form id=&quot;examForm&quot; novalidate&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div&gt;&lt;label for=&quot;sname&quot;&gt;Student name&lt;/label&gt;&lt;input id=&quot;sname&quot; placeholder=&quot;Full name&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label for=&quot;roll&quot;&gt;Roll number&lt;/label&gt;&lt;input id=&quot;roll&quot; placeholder=&quot;e.g. 101&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit exam&lt;/button&gt;
+  &lt;button type=&quot;reset&quot; class=&quot;alt&quot; id=&quot;resetBtn&quot;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id=&quot;result&quot; class=&quot;msg&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const questions = [
+  {q:&quot;Which tag is used to include a JavaScript file?&quot;, o:[&quot;&lt;link&gt;&quot;,&quot;&lt;script&gt;&quot;,&quot;&lt;js&gt;&quot;,&quot;&lt;code&gt;&quot;], a:1},
+  {q:&quot;Which method shows a message box with an OK button?&quot;, o:[&quot;alert()&quot;,&quot;prompt()&quot;,&quot;print()&quot;,&quot;log()&quot;], a:0},
+  {q:&quot;Which symbol starts a single-line comment in JavaScript?&quot;, o:[&quot;&lt;!-- --&gt;&quot;,&quot;#&quot;,&quot;//&quot;,&quot;**&quot;], a:2},
+  {q:&quot;Which keyword declares a block-scoped variable?&quot;, o:[&quot;var&quot;,&quot;let&quot;,&quot;int&quot;,&quot;dim&quot;], a:1},
+  {q:&quot;What does typeof 42 return?&quot;, o:[&quot;string&quot;,&quot;number&quot;,&quot;integer&quot;,&quot;object&quot;], a:1}
+];
+const box = document.getElementById(&quot;questions&quot;);
+questions.forEach((item, i) =&gt; {
+  const wrap = document.createElement(&quot;div&quot;);
+  const h = document.createElement(&quot;label&quot;);
+  h.textContent = (i + 1) + &quot;. &quot; + item.q;
+  wrap.appendChild(h);
+  item.o.forEach((text, j) =&gt; {
+    const l = document.createElement(&quot;label&quot;);
+    l.className = &quot;inline&quot;;
+    const r = document.createElement(&quot;input&quot;);
+    r.type = &quot;radio&quot;; r.name = &quot;q&quot; + i; r.value = j;
+    l.appendChild(r);
+    l.appendChild(document.createTextNode(text));
+    wrap.appendChild(l);
+  });
+  box.appendChild(wrap);
+});
+const result = document.getElementById(&quot;result&quot;);
+function show(text, ok) { result.textContent = text; result.className = &quot;msg show &quot; + (ok ? &quot;ok&quot; : &quot;err&quot;); }
+document.getElementById(&quot;examForm&quot;).addEventListener(&quot;submit&quot;, function (e) {
+  e.preventDefault();
+  const name = document.getElementById(&quot;sname&quot;).value.trim();
+  const roll = document.getElementById(&quot;roll&quot;).value.trim();
+  if (name === &quot;&quot; || roll === &quot;&quot;) { show(&quot;Please enter your name and roll number.&quot;, false); return; }
+  let score = 0;
+  for (let i = 0; i &lt; questions.length; i++) {
+    const chosen = document.querySelector(&#x27;input[name=&quot;q&#x27; + i + &#x27;&quot;]:checked&#x27;);
+    if (!chosen) { show(&quot;Please answer question &quot; + (i + 1) + &quot;.&quot;, false); return; }
+    if (Number(chosen.value) === questions[i].a) score++;
+  }
+  show(name + &quot; (Roll &quot; + roll + &quot;): you scored &quot; + score + &quot; out of &quot; + questions.length + &quot; - &quot; + (score &gt;= 3 ? &quot;Pass&quot; : &quot;Fail&quot;), score &gt;= 3);
+});
+document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; result.className = &quot;msg&quot;);
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><span></span><a href="../assignments/2/index.html" target="_top">Website registration form &rarr;</a></nav></main>
+<script>
+const questions = [
+  {q:"Which tag is used to include a JavaScript file?", o:["<link>","<script>","<js>","<code>"], a:1},
+  {q:"Which method shows a message box with an OK button?", o:["alert()","prompt()","print()","log()"], a:0},
+  {q:"Which symbol starts a single-line comment in JavaScript?", o:["<!-- -->","#","//","**"], a:2},
+  {q:"Which keyword declares a block-scoped variable?", o:["var","let","int","dim"], a:1},
+  {q:"What does typeof 42 return?", o:["string","number","integer","object"], a:1}
+];
+const box = document.getElementById("questions");
+questions.forEach((item, i) => {
+  const wrap = document.createElement("div");
+  const h = document.createElement("label");
+  h.textContent = (i + 1) + ". " + item.q;
+  wrap.appendChild(h);
+  item.o.forEach((text, j) => {
+    const l = document.createElement("label");
+    l.className = "inline";
+    const r = document.createElement("input");
+    r.type = "radio"; r.name = "q" + i; r.value = j;
+    l.appendChild(r);
+    l.appendChild(document.createTextNode(text));
+    wrap.appendChild(l);
+  });
+  box.appendChild(wrap);
+});
+const result = document.getElementById("result");
+function show(text, ok) { result.textContent = text; result.className = "msg show " + (ok ? "ok" : "err"); }
+document.getElementById("examForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("sname").value.trim();
+  const roll = document.getElementById("roll").value.trim();
+  if (name === "" || roll === "") { show("Please enter your name and roll number.", false); return; }
+  let score = 0;
+  for (let i = 0; i < questions.length; i++) {
+    const chosen = document.querySelector('input[name="q' + i + '"]:checked');
+    if (!chosen) { show("Please answer question " + (i + 1) + ".", false); return; }
+    if (Number(chosen.value) === questions[i].a) score++;
+  }
+  show(name + " (Roll " + roll + "): you scored " + score + " out of " + questions.length + " - " + (score >= 3 ? "Pass" : "Fail"), score >= 3);
+});
+document.getElementById("resetBtn").addEventListener("click", () => result.className = "msg");
+</script></body></html>

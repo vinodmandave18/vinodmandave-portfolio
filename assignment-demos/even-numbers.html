@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Even numbers 1 to 100 | Lab Assignment 5</title><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><a href="../index.html#assignments" target="_top">&larr; All assignments</a><span>Assignment 5</span></header>
+<main class="wrap"><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 5</p><h1>Even numbers 1 to 100</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to display all even numbers between 1 and 100 in an HTML page.</p>
+<section class="card">
+<div id="out" class="chips"></div>
+<p id="count"></p>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;div id=&quot;out&quot; class=&quot;chips&quot;&gt;&lt;/div&gt;
+&lt;p id=&quot;count&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+const out = document.getElementById(&quot;out&quot;);
+let count = 0;
+for (let i = 1; i &lt;= 100; i++) {
+  if (i % 2 === 0) {
+    out.innerHTML += &#x27;&lt;span class=&quot;chip&quot;&gt;&#x27; + i + &quot;&lt;/span&gt;&quot;;
+    count++;
+  }
+}
+document.getElementById(&quot;count&quot;).textContent = &quot;Total even numbers: &quot; + count;
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="../assignments/4/index.html" target="_top">&larr; Student marksheet by seat number</a><a href="../assignments/6/index.html" target="_top">Odd numbers 1 to 100 &rarr;</a></nav></main>
+<script>
+const out = document.getElementById("out");
+let count = 0;
+for (let i = 1; i <= 100; i++) {
+  if (i % 2 === 0) {
+    out.innerHTML += '<span class="chip">' + i + "</span>";
+    count++;
+  }
+}
+document.getElementById("count").textContent = "Total even numbers: " + count;
+</script></body></html>
